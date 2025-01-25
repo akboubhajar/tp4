@@ -2,18 +2,20 @@ pipeline {
     agent any
 
     environment {
-        registry = "akboubhajar/tp4"  
-        registryCredential = 'dockerhub-token'  
+        registry = "akboubhajar/tp4"  // Replace with your Docker Hub repository name
+        registryCredential = 'dockerhub-token'  // Ensure this matches the credentials ID
         dockerImage = ""
     }
 
     stages {
+        // Stage 1: Clone the Git repository
         stage('Cloning Git') {
             steps {
-                git 'https://github.com/akboubhajar/tp4' 
+                git 'https://github.com/akboubhajar/tp4'
             }
         }
 
+        // Stage 2: Build the Docker image
         stage('Building image') {
             steps {
                 script {
@@ -22,6 +24,7 @@ pipeline {
             }
         }
 
+        // Stage 3: Test the Docker image
         stage('Test image') {
             steps {
                 script {
@@ -30,6 +33,7 @@ pipeline {
             }
         }
 
+        // Stage 4: Publish the Docker image to Docker Hub
         stage('Publish Image') {
             steps {
                 script {
@@ -40,6 +44,7 @@ pipeline {
             }
         }
 
+        // Stage 5: Deploy the Docker image
         stage('Deploy image') {
             steps {
                 script {
