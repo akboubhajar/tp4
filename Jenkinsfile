@@ -8,14 +8,12 @@ pipeline {
     }
 
     stages {
-        // Stage 1: Clone the Git repository
         stage('Cloning Git') {
             steps {
                 git 'https://github.com/akboubhajar/tp4'
             }
         }
 
-        // Stage 2: Authenticate Docker
        stage('Authenticate Docker') {
     steps {
         script {
@@ -26,7 +24,6 @@ pipeline {
     }
 }
 
-        // Stage 3: Build the Docker image
         stage('Building image') {
             steps {
                 script {
@@ -35,7 +32,6 @@ pipeline {
             }
         }
 
-        // Stage 4: Test the Docker image
         stage('Test image') {
             steps {
                 script {
@@ -44,7 +40,6 @@ pipeline {
             }
         }
 
-        // Stage 5: Publish the Docker image to Docker Hub
         stage('Publish Image') {
             steps {
                 script {
@@ -55,7 +50,6 @@ pipeline {
             }
         }
 
-        // Stage 6: Deploy the Docker image
         stage('Deploy image') {
             steps {
                 script {
