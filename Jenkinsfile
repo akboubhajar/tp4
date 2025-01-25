@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        registry = "akboubhajar/tp4"  // Replace with your Docker Hub repository name
-        registryCredential = 'dockerhub-token'  // Ensure this matches the credentials ID
+        registry = "akboubhajar/tp4"  
+      registryCredential = 'Jenkinsfile'
         dockerImage = ""
     }
 
@@ -16,13 +16,15 @@ pipeline {
         }
 
         // Stage 2: Authenticate Docker
-        stage('Authenticate Docker') {
-            steps {
-                script {
-                  bat "echo ${registryCredential} | docker login -u akboubhajar --password-stdin"
-                }
+       stage('Authenticate Docker') {
+    steps {
+        script {
+            withCredentials([usernamePassword(credentialsId: registryCredential, usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+                bat "echo %DOCKER_HUB_PASSWORD% | docker login -u %DOCKER_HUB_USERNAME% --password-stdin"
             }
         }
+    }
+}
 
         // Stage 3: Build the Docker image
         stage('Building image') {
