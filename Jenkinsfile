@@ -19,7 +19,7 @@ pipeline {
         stage('Authenticate Docker') {
             steps {
                 script {
-                    sh "echo ${registryCredential} | docker login -u akboubhajar --password-stdin"
+                  bat "echo ${registryCredential} | docker login -u akboubhajar --password-stdin"
                 }
             }
         }
@@ -57,7 +57,7 @@ pipeline {
         stage('Deploy image') {
             steps {
                 script {
-                    sh "docker run -d ${registry}:${BUILD_NUMBER}"
+                    bat "docker run -d ${registry}:${BUILD_NUMBER}"
                 }
             }
         }
