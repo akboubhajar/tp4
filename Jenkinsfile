@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         registry = "akboubhajar/tp4"  
-        registryCredential = 'dockerhub'  
+        registryCredential = 'dockerhub-token'  
         dockerImage = ""
     }
 
